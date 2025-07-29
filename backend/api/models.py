@@ -1,10 +1,12 @@
 from django.db import models
 import uuid
-# Create your models here.
 
 class TimeStampedModel(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True) 
+    updated_at = models.DateTimeField(auto_now=True) 
+
+    class Meta:
+        abstract = True
 
 class User(models.Model):
     id = models.UUIDField(
@@ -14,7 +16,7 @@ class User(models.Model):
     )
     name = models.CharField(max_length=100)
 
-class Post(models.Model):
+class Post(TimeStampedModel): 
     id = models.UUIDField(
         primary_key=True,
         default=uuid.uuid4,
@@ -23,6 +25,5 @@ class Post(models.Model):
     description = models.CharField(max_length=100)
     text = models.CharField(max_length=1000)
     publisher = models.ForeignKey(User, on_delete=models.CASCADE)
-    time_stamp = models.ForeignKey(TimeStampedModel, on_delete=models.CASCADE)
 
 

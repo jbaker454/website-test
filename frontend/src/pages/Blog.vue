@@ -2,6 +2,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import post_form from '@/components/forms/postForm.vue'
 
 interface TimeStampedModel {
   created_at: string
@@ -41,6 +42,8 @@ async function fetchResources(): Promise<void> {
   }
 }
 
+
+
 onMounted(() => {
   fetchResources()
 })
@@ -49,6 +52,8 @@ onMounted(() => {
 <template>
   <div>
     <h1>Blog Page</h1>
+    <a href="http://localhost:8000/api/post/"> this is the link to post </a>
+    <post_form/>
     <ul>
       <li v-for="post in posts" :key="post.id"> 
         {{ typeof post.publisher === 'string' ? post.publisher : post.publisher.name }} 
